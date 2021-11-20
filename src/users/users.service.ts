@@ -9,4 +9,8 @@ export class UsersService extends TypeOrmCrudService<User> {
   constructor(@InjectRepository(User) repo) {
     super(repo);
   }
+
+  findOneByEmail = (email: string) => {
+    return this.repo.findOneOrFail({ email });
+  };
 }
