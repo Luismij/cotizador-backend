@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
-import ormConfig from '../config/typeorm/typeorm.config';
+import ormConfig from './config/typeorm/typeorm.config';
 
 @Module({
   imports: [
