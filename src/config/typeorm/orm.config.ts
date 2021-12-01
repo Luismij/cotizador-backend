@@ -11,9 +11,9 @@ const ormConfig: ConnectionOptions = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   entities: ['dist/**/*.entity{.ts,.js}'],
-  synchronize: !!process.env.DB_SYNC || false,
+  synchronize: false,
   migrationsRun: false,
-  logging: true,
+  logging: !!process.env.ORM_LOGGING,
   migrations: ['dist/migrations/**/*.js'],
   cli: {
     migrationsDir: 'src/migrations',

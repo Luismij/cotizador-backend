@@ -9,6 +9,6 @@ export default registerAs(
       ...ormConfig,
       // Nestjs specific
       keepConnectionAlive: true,
-      autoLoadEntities: true,
+      autoLoadEntities: false,
     } as TypeOrmModuleOptions),
 );

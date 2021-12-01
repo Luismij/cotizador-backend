@@ -9,21 +9,11 @@ import { UsersService } from './users.service';
   model: {
     type: User,
   },
-  params: {
-    id: {
-      type: 'uuid',
-      primary: true,
-    },
-    email: {
-      type: 'string',
-    },
-  },
   query: {
     exclude: ['password'],
     persist: ['createdAt'],
   },
 })
-@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController implements CrudController<User> {
   constructor(public service: UsersService) {}
