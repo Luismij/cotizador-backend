@@ -1,9 +1,21 @@
-import { Controller, UseGuards } from '@nestjs/common';
-import { Crud, CrudAuth, CrudController } from '@nestjsx/crud';
+import { Controller, UploadedFile, UseGuards } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import {
+  Crud,
+  CrudAuth,
+  CrudController,
+  CrudRequest,
+  Override,
+  ParsedBody,
+  ParsedRequest,
+} from '@nestjsx/crud';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 import { Customer } from 'src/models/customer.entity';
 import { User } from 'src/models/user.entity';
+import { imageFileFilter } from 'src/utils/multerFilters';
 import { CustomersService } from './customers.service';
 
 @Crud({
@@ -12,6 +24,22 @@ import { CustomersService } from './customers.service';
   },
   query: {
     persist: ['createdAt'],
+  },
+  routes: {
+    createOneBase: {
+      interceptors: [
+        FileInterceptor('logo', {
+          fileFilter: imageFileFilter,
+        }),
+      ],
+    },
+    updateOneBase: {
+      interceptors: [
+        FileInterceptor('logo', {
+          fileFilter: imageFileFilter,
+        }),
+      ],
+    },
   },
 })
 @CrudAuth({
@@ -27,4 +55,36 @@ import { CustomersService } from './customers.service';
 @Controller('customers')
 export class CustomersController implements CrudController<Customer> {
   constructor(public service: CustomersService) {}
+
+  get base(): CrudController<Customer> {
+    return this;
+  }
+
+  @Override()
+  createOne(
+    @ParsedRequest() req: CrudRequest,
+    @ParsedBody() dto: Customer,
+    @UploadedFile() logo: Express.Multer.File,
+  ) {
+    if (logo) {
+      const { destination, filename } = logo;
+      const path = destination.replace('./public', '');
+      dto.logo = `${path}/${filename}`;
+    }
+    return this.base.createOneBase(req, dto);
+  }
+
+  @Override('updateOneBase')
+  updateOne(
+    @ParsedRequest() req: CrudRequest,
+    @ParsedBody() dto: Customer,
+    @UploadedFile() logo: Express.Multer.File,
+  ) {
+    if (logo) {
+      const { destination, filename } = logo;
+      const path = destination.replace('./public', '');
+      dto.logo = `${path}/${filename}`;
+    }
+    return this.base.updateOneBase(req, dto);
+  }
 }
