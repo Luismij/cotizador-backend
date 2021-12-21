@@ -9,8 +9,6 @@ import {
   ParsedBody,
   ParsedRequest,
 } from '@nestjsx/crud';
-import { diskStorage } from 'multer';
-import { extname } from 'path';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 import { Customer } from 'src/models/customer.entity';
@@ -71,6 +69,9 @@ export class CustomersController implements CrudController<Customer> {
       const path = destination.replace('./public', '');
       dto.logo = `${path}/${filename}`;
     }
+    if (dto.logo === 'null') {
+      dto.logo = null;
+    }
     return this.base.createOneBase(req, dto);
   }
 
@@ -84,6 +85,9 @@ export class CustomersController implements CrudController<Customer> {
       const { destination, filename } = logo;
       const path = destination.replace('./public', '');
       dto.logo = `${path}/${filename}`;
+    }
+    if (dto.logo === 'null') {
+      dto.logo = null;
     }
     return this.base.updateOneBase(req, dto);
   }
