@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Company } from './company.entity';
+import { Pricing } from './pricing.entity';
 import { User } from './user.entity';
 
 /**
@@ -12,4 +13,7 @@ export class Customer extends Company {
 
   @Column({ nullable: true })
   contact: string | null;
+
+  @OneToMany(() => Pricing, (pricing) => pricing.customer)
+  pricings: Pricing[];
 }

@@ -6,13 +6,13 @@ import {
   IsEmail,
   IsNotEmpty,
   IsOptional,
-  Length,
   Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
 
 import { CrudValidationGroups } from '@nestjsx/crud';
+import { Pricing } from './pricing.entity';
 const { CREATE, UPDATE } = CrudValidationGroups;
 
 /**
@@ -50,6 +50,9 @@ export class User extends Company {
 
   @OneToMany(() => Customer, (customer) => customer.user)
   customers: Customer[];
+
+  @OneToMany(() => Pricing, (pricing) => pricing.user)
+  pricings: Pricing[];
 
   @BeforeInsert()
   @BeforeUpdate()
