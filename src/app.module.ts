@@ -7,6 +7,8 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { CustomersModule } from './customers/customers.module';
+import { PricingsModule } from './pricings/pricings.module';
+import { ProductsModule } from './products/products.module';
 import typeormConfig from './config/typeorm/typeorm.config';
 import authConfig from './config/auth/auth.config';
 import multerConfig from './config/multer/multer.config';
@@ -26,6 +28,8 @@ import multerConfig from './config/multer/multer.config';
     UsersModule,
     AuthModule,
     CustomersModule,
+    PricingsModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
