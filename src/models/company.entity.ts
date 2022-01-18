@@ -27,7 +27,7 @@ export abstract class Company extends BaseEntity {
   @IsOptional({ groups: [UPDATE] })
   @IsNotEmpty({ groups: [CREATE], message: 'El nit no puede estar vacío' })
   @IsString({ always: true, message: 'El nit debe ser un string' })
-  @Column({ nullable: false, unique: true })
+  @Column({ nullable: false, unique: false })
   nit: string;
 
   @Column({ nullable: true })
