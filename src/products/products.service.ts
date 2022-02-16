@@ -62,7 +62,6 @@ export class ProductsService extends TypeOrmCrudService<Product> {
     );
   }
 
-  @
   @Cron(CronExpression.EVERY_DAY_AT_5PM, {
     name: 'Update products',
     timeZone: 'America/Bogota',
