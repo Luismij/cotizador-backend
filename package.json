@@ -26,6 +26,7 @@
     "typeorm:migration:create": "npm run typeorm migration:create -- -n"
   },
   "dependencies": {
+    "@nestjs/axios": "^0.0.5",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.1.0",
     "@nestjs/core": "^8.0.0",
@@ -33,6 +34,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/schedule": "^1.0.2",
     "@nestjs/typeorm": "^8.0.2",
     "@nestjsx/crud": "^5.0.0-alpha.3",
     "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
@@ -55,6 +57,7 @@
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
     "@types/bcrypt": "^5.0.0",
+    "@types/cron": "^1.7.3",
     "@types/express": "^4.17.13",
     "@types/jest": "27.0.2",
     "@types/multer": "^1.4.7",
